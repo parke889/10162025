@@ -77,7 +77,6 @@ html {
 
 body {
   -ms-overflow-style: none; 
-s
 }
 
 h1 {
@@ -151,12 +150,10 @@ header, footer {
     text-align: center;
     padding: 15px;}
     
-.start.date,
-.bar,
-.end.date {
+.start, .bar, .end {
   opacity: 0;
 }
-.start.date {
+.start {
   order: 1;
   animation: fadeUp 0.8s ease forwards;
   animation-delay: 0.2s; /* first appears */
@@ -168,7 +165,7 @@ header, footer {
   animation-delay: 0.8s; /* second appears */
 }
 
-.end.date {
+.end {
   order: 3;
   animation: fadeUp 0.8s ease forwards;
   animation-delay: 1.4s; /* third appears */
