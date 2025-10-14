@@ -81,7 +81,7 @@ s
 }
 
 h1 {
-    margin-top: 10vh;
+
     font-weight: 400;
 }
 
@@ -143,8 +143,35 @@ h2 {
 }
 
 header, footer {
+          margin-top: 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* center horizontally */
+  align-items: center;     /* align vertically */
     text-align: center;
-    padding: 15px;
+    padding: 15px;}
+    
+.start.date,
+.bar,
+.end.date {
+  opacity: 0;
+}
+.start.date {
+  order: 1;
+  animation: fadeUp 0.8s ease forwards;
+  animation-delay: 0.2s; /* first appears */
+}
+
+.bar {
+  order: 2;
+  animation: fadeUp 0.8s ease forwards;
+  animation-delay: 0.8s; /* second appears */
+}
+
+.end.date {
+  order: 3;
+  animation: fadeUp 0.8s ease forwards;
+  animation-delay: 1.4s; /* third appears */
 }
 
     nav {
@@ -164,7 +191,16 @@ header, footer {
         width: 100%;
         padding: 10px;
     }
-
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 .answer {
     align-self: flex-end;
     display: flex;       /* enable Flexbox */
