@@ -28,11 +28,21 @@
     <p> tap to start </p>
   </main>
 
+
   <script>
-    // When you click or tap anywhere, show the heart
-    document.body.addEventListener('click', function() {
+    document.body.addEventListener('click', function handleTap() {
       const heart = document.querySelector('.heart');
+
+      // Show the heart
       heart.classList.remove('hidden');
+
+      // Start a 3-second timer to redirect
+      setTimeout(() => {
+        window.location.href = "introlog/index.html"; // path to the next page
+      }, 3000);
+
+      // Remove the click listener so it only triggers once
+      document.body.removeEventListener('click', handleTap);
     });
   </script>
   
