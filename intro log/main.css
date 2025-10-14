@@ -19,11 +19,34 @@ body {
   0% {
     background-color: rgb(155, 203, 223);
   }
-  30% {
+
+  10% {
     background-color: #f4f4f4;
+    }
+
+  20% {
+
+    background-image: url('../asset/imgs/graphics/intro-start-1.png');
   }
+
+  30% {
+    background-image: url('../asset/imgs/graphics/intro-start-3.png');
+  }
+    40% {
+    background-image: url('../asset/imgs/graphics/intro-start.png');
+  }
+    50% {
+    background-image: url('../asset/imgs/graphics/intro-start-2.png');
+  }
+
     60% {
-    background-color: #ff9c9c;
+    background-image: url('../asset/imgs/graphics/intro-start-1.png');
+  }
+    70% {
+    background-image: url('../asset/imgs/graphics/intro-start-3.png');
+  }
+    100% {
+    background-image: url('../asset/imgs/graphics/intro-today.png');
   }
 }
 
@@ -64,6 +87,8 @@ body {
         scrollbar-width: none;
       -ms-overflow-style: none;
       justify-items: center;
+      background-color: #f4f4f4;
+      animation: bgFade 5s ease-in-out;
     }
    
 ::-webkit-scrollbar {
@@ -162,13 +187,13 @@ header, footer {
 .bar {
   order: 2;
   animation: fadeUp 0.8s ease forwards;
-  animation-delay: 0.8s; /* second appears */
+  animation-delay: 1s; /* second appears */
 }
 
 .end {
   order: 3;
   animation: fadeUp 0.8s ease forwards;
-  animation-delay: 1.4s; /* third appears */
+  animation-delay: 3.8s; /* third appears */
 }
 
     nav {
@@ -211,4 +236,5 @@ header, footer {
     font-size: 1em;
     text-align: center;
     background-color:  rgb(155, 203, 223);
+}
 }
