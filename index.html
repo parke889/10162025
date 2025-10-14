@@ -4,21 +4,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Happy Birthday</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100;400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="main.css">
 </head>
+
 <body>
   <header>
     <h1>All About Us</h1>
-    <h2>우리에 대한 모든 것</h2>
+    <h2>  우리에 대한 모든 것  </h2>
   </header>
 
   <section class="character">
-    <img src="asset/imgs/graphics/Asset%201.png" alt="Graphic Asset"> 
-    <img src="asset/imgs/graphics/Asset%202.png" alt="Graphic Asset"> 
+    <img class="jade" src="asset/imgs/graphics/Asset 5.png" alt="Graphic Asset"> 
+        <!-- Heart image (initially hidden) -->
+    <img class="heart hidden" src="asset/imgs/graphics/heart.png" alt="Heart"> 
+    <img class="jy" src="asset/imgs/graphics/Asset 4.png" alt="Graphic Asset"> 
   </section>
+ 
   <main>
-    <p> tap to start </p>
+    <p> ⮞tap to start⮜</p>
   </main>
 
+  <script>
+    // When you click or tap anywhere, show the heart
+    document.body.addEventListener('click', function() {
+      const heart = document.querySelector('.heart');
+      heart.classList.remove('hidden');
+    });
+  </script>
+  
 </body>
 </html>
