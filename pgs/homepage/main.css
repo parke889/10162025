@@ -187,9 +187,9 @@
   }
   .entry .entry-header img.heart {
     position:absolute;
-    left: 58px;
-    height: 58px;
-    width: 58px;
+    left: 5%;
+    height: 98px;
+    width: 98px;
     object-fit: contain;
     margin-right: 10px;
   }
@@ -210,11 +210,11 @@
 
 .entry-header .entry-number {
   position: absolute;
-  left: 58px;  /* adjust depending on heart size */
+  left: 10%;  /* adjust depending on heart size */
   top: 12px;
   font-size: 12px;
   font-weight: 600;
-  color: #444;
+  color: #ffffff;
 }
   .slideshow {
     width: 90%;
@@ -237,7 +237,7 @@
     align-items: center;
     justify-content: center;
     font-size: 14px;
-    color: #333;
+    color: #acacac;
   }
   .slide img {
     max-width: 100%;

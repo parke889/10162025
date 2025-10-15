@@ -103,27 +103,89 @@ const nextBtn = document.getElementById('next');
 const slideshow = document.getElementById('slideshow');
 const closeEntry = document.getElementById('close-entry');
 
+// function buildSlidesFor(index) {
+//   slideshow.innerHTML = '';
+//   for (let i = 0; i < 3; i++) {
+//     const s = document.createElement('div');
+//     s.className = 'slide';
+//     const img = document.createElement('img');
+//     img.src = 'main.png';
+//     img.alt = 'slide ' + (i + 1);
+//     s.appendChild(img);
+//     s.style.opacity = i === 0 ? 1 : 0;
+//     s.dataset.idx = i;
+//     slideshow.appendChild(s);
+//   }
+//   slideshow.dataset.current = 0;
+// }
+
 function buildSlidesFor(index) {
   slideshow.innerHTML = '';
-  for (let i = 0; i < 3; i++) {
+  const entryFolder = `../../asset/imgs/entries/entry${index}/`;
+
+  const imageCounts = [20, 62, 16, 8, 43, 33, 2, 45, 12, 0, 32];
+  const count = imageCounts[index] || 3;
+
+  for (let i = 0; i < count; i++) {
     const s = document.createElement('div');
     s.className = 'slide';
+    s.style.opacity = i === 0 ? 1 : 0; // set opacity on the slide, not img
+
     const img = document.createElement('img');
-    img.src = 'main.png';
-    img.alt = 'slide ' + (i + 1);
+    const basePath = `${entryFolder}${i + 1}`;
+    img.alt = `entry ${index} slide ${i + 1}`;
+
+    img.src = `${basePath}.jpeg`;
+    img.onerror = function () {
+      this.onerror = null;
+      this.src = `${basePath}.jpg`;
+    };
+    img.onerror = function () {
+      // Fallback to .jpg
+      this.onerror = null;
+      this.src = `${basePath}.jpg`;
+
+      this.onerror = function () {
+        // Fallback to video .mov
+        const video = document.createElement('video');
+        video.src = `${basePath}.mov`;
+        video.controls = true;
+        video.autoplay = true;
+        video.loop = true;
+        video.style.width = '100%';
+        video.style.height = '100%';
+
+        s.innerHTML = ''; // remove failed img
+        s.appendChild(video);
+      };
+    };
     s.appendChild(img);
-    s.style.opacity = i === 0 ? 1 : 0;
-    s.dataset.idx = i;
     slideshow.appendChild(s);
   }
+
   slideshow.dataset.current = 0;
 }
+
 function showSlide(offset) {
   const slides = slideshow.querySelectorAll('.slide');
   let cur = parseInt(slideshow.dataset.current || 0, 10);
   cur = (cur + offset + slides.length) % slides.length;
-  slides.forEach((s, i) => (s.style.opacity = i === cur ? 1 : 0));
-  slideshow.dataset.current = cur;
+  
+  slides.forEach((s, i) => {
+    s.style.opacity = i === cur ? 1 : 0;
+
+    const video = s.querySelector('video');
+    if (video) {
+      if (i === cur) {
+        video.play();    // play the current video
+      } else {
+        video.pause();   // pause all others
+        video.currentTime = 0; // optional: rewind to start
+      }
+    }
+  });
+
+    slideshow.dataset.current = cur;
 }
 
 let currentBubbleIdx = null;
@@ -135,22 +197,23 @@ function onBubbleClick(e) {
     loading.classList.remove('show');
     openEntry(idx);
     visited.add(idx);
-  }, 3000);
+  }, 500);
 }
+
 
 // Define all entries
 const entries = [
   { num: 1, title: "outfit check!", subtitle: "우리의 ootd" },
   { num: 2, title: "맛밥로그", subtitle: "함께 먹은 음식들" },
-  { num: 3, title: "travel log", subtitle: "" },
-  { num: 4, title: "messages", subtitle: "" },
-  { num: 5, title: "FaceTime", subtitle: "" },
-  { num: 6, title: "Hugs and Kisses", subtitle: "" },
-  { num: 7, title: "silly moment", subtitle: "" },
+  { num: 3, title: "travel log", subtitle: "JJ커플의 발길이 닿은곳" },
+  { num: 4, title: "messages", subtitle: "주고받은 대화" },
+  { num: 5, title: "FaceTime", subtitle: "영통모음" },
+  { num: 6, title: "Hugs and Kisses", subtitle: "우엑모먼트" },
+  { num: 7, title: "birthday special", subtitle: "내가 초 켜주겟다고 햇잔아" },
   { num: 8, title: "someone", subtitle: "우리의 대답" },
-  { num: 9, title: "정연 닮은꼴", subtitle: "" },
+  { num: 9, title: "정연 닮은꼴", subtitle: "천의얼굴 홍정연" },
   { num: 10, title: "기어코 찾았군", subtitle: "사랑의 메시지" },
-  { num: 11, title: "title tiltle", subtitle: "sub title haha" },
+  { num: 11, title: "love", subtitle: "생일기념 폭풍표현" },
 ];
 
 function openEntry(idx) {
@@ -181,7 +244,7 @@ function openEntry(idx) {
   entryTitle.innerHTML = `
     <div style="text-align:center;">
       <div>${e.title}</div>
-      ${e.subtitle ? `<div style="font-size:0.9em; opacity:0.8; margin-top:4px;">${e.subtitle}</div>` : ''}
+      ${e.subtitle ? `<div style="font-size:0.9em; opacity:0.8; margin-top:4px; ">${e.subtitle}</div>` : ''}
     </div>
   `;
 
@@ -200,8 +263,13 @@ closeEntry.addEventListener('click', () => {
   entry.classList.remove('show');
   removeVisitedFromDOM();
   showRefresh();
-});
 
+  // Pause all videos when closing
+  slideshow.querySelectorAll('video').forEach(v => {
+    v.pause();
+    v.currentTime = 0;
+  });
+});
 prevBtn.addEventListener('click', () => showSlide(-1));
 nextBtn.addEventListener('click', () => showSlide(1));
 
