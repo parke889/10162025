@@ -1,4 +1,20 @@
 
+@keyframes heartPop {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    position: absolute;
+  }
+
+    100% {
+        opacity: 1;
+        transform: scale(1.1);
+        position: absolute;
+        margin: 0;
+        padding: 0;
+  }
+
+}
 
   @media (max-width: 768px) {
       :root {
@@ -135,6 +151,8 @@
     width: 140px;
     height: auto;
     margin-bottom: 16px;
+    animation: heartPop 0.5s ease-in-out infinite;
+
   }
 
   /* Entry modal */
@@ -201,9 +219,11 @@
   .slideshow {
     width: 90%;
     max-width: 420px;
-    height: 420px;
+    height: 60%;
     background: #e6e6e6;
-    margin-top: 8px;
+    margin-top: 10%;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
