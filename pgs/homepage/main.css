@@ -121,9 +121,11 @@
     z-index: 3;
   }
   .refresh-btn {
+    margin-bottom: 25vh;
     background: #bfefff;
     border-radius: 28px;
-    padding: 10px 22px;
+    font-size: small;
+    padding: 10px 32px;
     font-weight: 700;
     border: none;
     cursor: pointer;
