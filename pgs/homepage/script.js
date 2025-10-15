@@ -197,7 +197,7 @@ function onBubbleClick(e) {
     loading.classList.remove('show');
     openEntry(idx);
     visited.add(idx);
-  }, 500);
+  }, 3000);
 }
 
 
