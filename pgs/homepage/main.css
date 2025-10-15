@@ -1,18 +1,24 @@
-  :root {
+
+
+  @media (max-width: 768px) {
+      :root {
     --bg: #ffffff;
     --bubble: rgba(173, 216, 230, 0.75);
     --bubble-size: 110px;
   }
   html, body {
     height: 100%;
+    width: 100%;
     margin: 0;
     font-family: 'Geist Mono', monospace;
     overflow: hidden;
     background: var(--bg);
     color: #000;
+    
   }
   .app {
     height: 100vh;
+    width: 100vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,7 +28,7 @@
   }
   header {
     width: 100%;
-    padding: 18px 22px;
+    padding: 10px 10px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -30,15 +36,15 @@
     position: relative;
   }
   header .title {
-    font-size: .7em;
-    padding: 20px 45px;
-    letter-spacing: 0.2px;
+    font-size: 1em;
+    font-weight: 700;
+    letter-spacing: 1px;
   }
   header .time-left,
   header .time-right {
     position: absolute;
     top: 14px;
-    font-size: .5em;
+    font-size: 1em;
     font-family: monospace;
   }
   header .time-left {
@@ -239,3 +245,4 @@
       height: 320px;
     }
   }
+}
