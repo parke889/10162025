@@ -168,8 +168,10 @@
     box-sizing: border-box;
   }
   .entry .entry-header img.heart {
-    height: 48px;
-    width: 48px;
+    position:absolute;
+    left: 58px;
+    height: 58px;
+    width: 58px;
     object-fit: contain;
     margin-right: 10px;
   }
@@ -184,6 +186,18 @@
     font-size: 20px;
     cursor: pointer;
   }
+  .entry-header {
+  position: relative;
+}
+
+.entry-header .entry-number {
+  position: absolute;
+  left: 58px;  /* adjust depending on heart size */
+  top: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #444;
+}
   .slideshow {
     width: 90%;
     max-width: 420px;

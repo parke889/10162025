@@ -137,12 +137,64 @@ function onBubbleClick(e) {
     visited.add(idx);
   }, 3000);
 }
+
+// Define all entries
+const entries = [
+  { num: 1, title: "outfit check!", subtitle: "우리의 ootd" },
+  { num: 2, title: "맛밥로그", subtitle: "함께 먹은 음식들" },
+  { num: 3, title: "travel log", subtitle: "" },
+  { num: 4, title: "messages", subtitle: "" },
+  { num: 5, title: "FaceTime", subtitle: "" },
+  { num: 6, title: "Hugs and Kisses", subtitle: "" },
+  { num: 7, title: "silly moment", subtitle: "" },
+  { num: 8, title: "someone", subtitle: "우리의 대답" },
+  { num: 9, title: "정연 닮은꼴", subtitle: "" },
+  { num: 10, title: "기어코 찾았군", subtitle: "사랑의 메시지" },
+  { num: 11, title: "title tiltle", subtitle: "sub title haha" },
+];
+
 function openEntry(idx) {
+  const e = entries[idx];
+  if (!e) return;
   entryTitle.textContent =
     idx == 0 ? 'OUTFIT CHECK! 우리의 ootd' : 'Entry #' + (parseInt(idx) + 1);
+
+  entryTitle.innerHTML = `
+    <div style="text-align:center;">
+  <div> #${idx}: ${e.title}</div>${
+    e.subtitle ? `<div style="font-size:0.9em; margin-top:4px;">${e.subtitle}</div>` : ''
+  }`;
+
   buildSlidesFor(idx);
   entry.classList.add('show');
 }
+
+function openEntry(idx) {
+  const e = entries[idx];
+  if (!e) return;
+
+  // Create separate “Entry #” label for the heart area
+  const entryNumLabel = document.querySelector('.entry-header .entry-number');
+  if (entryNumLabel) entryNumLabel.textContent = `Entry #${idx}`;
+
+  // Centered title + subtitle below
+  entryTitle.innerHTML = `
+    <div style="text-align:center;">
+      <div>${e.title}</div>
+      ${e.subtitle ? `<div style="font-size:0.9em; opacity:0.8; margin-top:4px;">${e.subtitle}</div>` : ''}
+    </div>
+  `;
+
+  buildSlidesFor(idx);
+  entry.classList.add('show');
+}
+// function openEntry(idx) {
+//   entryTitle.textContent =
+//     idx == 0 ? 'OUTFIT CHECK! 우리의 ootd' : 'Entry #' + (parseInt(idx) + 1);
+//   buildSlidesFor(idx);
+//   entry.classList.add('show');
+// }
+
 
 closeEntry.addEventListener('click', () => {
   entry.classList.remove('show');
