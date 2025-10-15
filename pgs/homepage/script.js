@@ -18,6 +18,7 @@ function updateTimes() {
     document.getElementById('time-kr').textContent = now.toUTCString();
   }
 }
+
 updateTimes();
 setInterval(updateTimes, 1000);
 
