@@ -123,7 +123,7 @@ function buildSlidesFor(index) {
   slideshow.innerHTML = '';
   const entryFolder = `../../asset/imgs/entries/entry${index}/`;
 
-  const imageCounts = [20, 62, 16, 72, 43, 33, 2, 45, 12, 0, 32];
+  const imageCounts = [20, 62, 16, 72, 43, 40, 2, 45, 12, 1, 32];
   const count = imageCounts[index] || 3;
 
   for (let i = 0; i < count; i++) {
