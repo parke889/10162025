@@ -6,7 +6,8 @@
   html, body {
     height: 100%;
     margin: 0;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Geist Mono', monospace;
+    overflow: hidden;
     background: var(--bg);
     color: #000;
   }
@@ -29,14 +30,15 @@
     position: relative;
   }
   header .title {
-    font-size: 20px;
-    letter-spacing: 0.5px;
+    font-size: .7em;
+    padding: 20px 45px;
+    letter-spacing: 0.2px;
   }
   header .time-left,
   header .time-right {
     position: absolute;
     top: 14px;
-    font-size: 12px;
+    font-size: .5em;
     font-family: monospace;
   }
   header .time-left {

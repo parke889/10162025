@@ -47,19 +47,16 @@ function createBubbles() {
     );
     const x = rand(10, rect.width - w - 10);
     const y = rand(10, rect.height - w - 10);
-    el.style.left = x + 'px';
-    el.style.top = y + 'px';
     bubbleArea.appendChild(el);
-    const speed = rand(0.01, 0.05);
+
+    // assign small, smooth drift speeds
+    const speed = rand(0.02, 0.12);
     const angle = rand(0, Math.PI * 2);
-    values.push({
-      el,
-      x,
-      y,
-      vx: Math.cos(angle) * speed,
-      vy: Math.sin(angle) * speed,
-      w
-    });
+    const vx = Math.cos(angle) * speed;
+    const vy = Math.sin(angle) * speed;
+
+    values.push({ el, x, y, vx, vy, w });
+    el.style.transform = `translate(${x}px, ${y}px)`;
     el.addEventListener('click', onBubbleClick);
   }
 }
@@ -70,18 +67,34 @@ function animate(t) {
   const dt = Math.min(40, t - lastTime);
   lastTime = t;
   const rect = areaRect();
+
   for (const b of values) {
     if (visited.has(b.el.dataset.index)) continue;
+
+    // add tiny randomness for organic drift
+    b.vx += (Math.random() - 0.5) * 0.002;
+    b.vy += (Math.random() - 0.5) * 0.002;
+
+    // clamp speed so it stays gentle and smooth
+    const maxSpeed = 0.15;
+    b.vx = Math.max(Math.min(b.vx, maxSpeed), -maxSpeed);
+    b.vy = Math.max(Math.min(b.vy, maxSpeed), -maxSpeed);
+
+    // update position
     b.x += b.vx * dt;
     b.y += b.vy * dt;
+
+    // bounce softly off edges
     if (b.x <= 6 || b.x + b.w >= rect.width - 6) b.vx *= -1;
     if (b.y <= 6 || b.y + b.w >= rect.height - 6) b.vy *= -1;
-    b.el.style.transform = `translate(${Math.round(b.x)}px, ${Math.round(b.y)}px)`;
+
+    // GPU-accelerated transform (no layout jank)
+    b.el.style.transform = `translate(${b.x}px, ${b.y}px)`;
   }
+
   requestAnimationFrame(animate);
 }
 requestAnimationFrame(animate);
-
 const loading = document.getElementById('loading');
 const entry = document.getElementById('entry');
 const entryTitle = document.getElementById('entry-title');
